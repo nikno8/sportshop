@@ -3,6 +3,7 @@ package com.example.sportshop.controllers;
 import com.example.sportshop.models.Image;
 import com.example.sportshop.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.io.ByteArrayInputStream;
 @RestController
 @RequiredArgsConstructor
 public class ImageController {
+    @Autowired
     private ImageRepository imageRepository;
     @GetMapping("/images/{id}")
     private ResponseEntity<?> getImageById(@PathVariable Long id){
