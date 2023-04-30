@@ -6,10 +6,24 @@
         </title>
     </head>
     <body>
-        <h1>SportShop</h1><hr>
+    <h1>SportShop</h1>
+    <#if user.email??>
+        <h1>Имя пользователя: ${user.name} </h1>
+        <form action="logout" method="post">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input type="submit" value="Выйти"/>
+        </form>
+        <#if user.isAdmin()>
+            <a href="/admin">Панель администратора</a>
+        </#if>
+    <#else>
+        <a href="/login">Войти</a></h1><hr>
+    </#if>
+
+
         <h4>Список товаров</h4>
         <form action="/" method="get">
-            Поиск по назаванию товара: <input type="text" name="title"><br>
+            Поиск по названию товара: <input type="text" name="title"><br>
             <input type="submit" value="Поиск"/>
         </form>
         <#list products as product>
@@ -21,19 +35,21 @@
             <#else>
             <h3>Товаров нет</h3>
         </#list>
-        <hr>
-        <h3>Создать новый товар</h3>
-        <form action="/product/create" method="post" enctype="multipart/form-data">
-            Название объявления: <input type="text" name="title"/> <br> <br>
-            Описание товара: <input type="text" name="description"/> <br> <br>
-            Цена товара: <input type="number" name="price"/> <br> <br>
-            Бренд товара: <input type="text" name="brand"/> <br> <br>
-            Первая фотография: <input type="file" name="file1"/> <br> <br>
-            Вторая фотография: <input type="file" name="file2"/> <br> <br>
-            Третья фотография: <input type="file" name="file3"/> <br> <br>
-
-            <input type="submit" value="Добавить товар"/>
-        </form>
+        <#if user.email?? && user.isAdmin()>
+            <hr>
+            <h3>Создать новый товар</h3>
+            <form action="/product/create" method="post" enctype="multipart/form-data">
+                Название объявления: <input type="text" name="title"/> <br> <br>
+                Описание товара: <input type="text" name="description"/> <br> <br>
+                Цена товара: <input type="number" name="price"/> <br> <br>
+                Бренд товара: <input type="text" name="brand"/> <br> <br>
+                Первая фотография: <input type="file" name="file1"/> <br> <br>
+                Вторая фотография: <input type="file" name="file2"/> <br> <br>
+                Третья фотография: <input type="file" name="file3"/> <br> <br>
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <input type="submit" value="Добавить товар"/>
+            </form>
+        </#if>
     </body>
 </html>
 

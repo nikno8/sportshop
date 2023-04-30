@@ -18,8 +18,5 @@
 <b>Бренд товара</b>${product.brand}<br>
 <hr>
 
-<form action="/product/delete/${product.id}" method="post">
-    <input type="submit" value="Удалить товар"/>
-</form>
 </body>
 </html>
