@@ -13,7 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -22,10 +25,40 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
-    public  List<Product> listProducts(String title){
-        if (title!=null) return productRepository.findByTitle(title);
-        return productRepository.findAll();
+//    public  List <Product> listProducts(String title){
+//        if (title!=null) return productRepository.findByTitle(title);
+//        return productRepository.findAll();
+//    }
+//    public  List <Product> listProducts(String title, String brand){
+//        if (title!=null) {
+//            List<Product> found = productRepository.findByTitle(title);
+//            if(brand != null){
+//                List<Product> res = new ArrayList<>();
+//                ListIterator<Product> lItr = found.listIterator();
+//                while(lItr.hasNext()){
+//                    Product item = lItr.next();
+//                    if (item.getBrand().equals(brand)){
+//                        res.add(item);
+//                    }
+//                }
+//                return res;
+//            }
+//            return productRepository.findByTitle(title);
+//        }
+//        else if (brand!=null)
+//            return productRepository.findByBrand(brand);
+//        return productRepository.findAll();
+//    }
+    public  List <Product> listProducts(String title, String brand){
+        if (title==null && brand==null)
+            return productRepository.findAll();
+        else if (title==null || title.equals(""))
+            return productRepository.findByBrand(brand);
+        else if (brand==null || brand.equals(""))
+            return productRepository.findByTitle(title);
+        return productRepository.findByBrandAndTitle(brand, title);
     }
+
     public void saveProduct(Principal principal, Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
         product.setUser(getUserByPrincipal(principal));
         Image image1;
@@ -44,7 +77,7 @@ public class ProductService {
             image3 = toImageEntity(file3);
             product.addImageToProduct(image3);
         }
-        log.info("Saving new Product. Title: {}; Author email: {}", product.getTitle(), product.getUser().getEmail());
+        log.info("Saving new Product. Title: {}; Brand: {}", product.getTitle(), product.getBrand());
         Product productFromDB = productRepository.save(product);
         productFromDB.setPreviewImageId(productFromDB.getImages().get(0).getId());
         productRepository.save(product);
@@ -66,9 +99,15 @@ public class ProductService {
         return image;
     }
 
-    public void deleteProduct(Long id){
-        productRepository.deleteById(id);
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id)
+                .orElse(null);
+        if (product != null) {
+            productRepository.delete(product);
+            log.info("Product with id = {} was deleted", id);
+        }
     }
+
 
 
     public Product getProductById(Long id) {
