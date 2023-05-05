@@ -21,20 +21,32 @@
             <button style="width: 100%" type="submit" class="btn btn-dark">Поиск</button>
         </div>
     </form>
+    <br>
+     <#if !user.email?? && !user.isAdmin()>
+        <form action="/login" method="get" >
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <button class="btn btn-primary" style="width: 100%">Авторизируйтесь для покупок</button>
+        </form>
+    </#if>
     <hr>
     <div class="card-columns">
         <#list products as product>
             <a href="/product/${product.id}" class="product-link">
                 <div class="card text-white bg-dark my-3 product">
-
                     <img src="/images/${product.previewImageId}"
                          class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">${product.title}</h5>
                         <p class="card-text">${product.price} ₽</p>
+                        ${product.brand}
                     </div>
                     <div class="card-footer">
-                        ${product.brand}
+                        <#if user.email?? && !user.isAdmin()>
+                            <form action="/basket/add/${product.id}" method="post">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                <button class="btn btn-outline-success" style=" width: 100%">Добавить в корзину</button>
+                            </form>
+                        </#if>
                     </div>
                 </div>
             </a>

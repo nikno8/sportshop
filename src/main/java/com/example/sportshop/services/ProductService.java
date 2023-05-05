@@ -13,10 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Objects;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,30 +24,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
-//    public  List <Product> listProducts(String title){
-//        if (title!=null) return productRepository.findByTitle(title);
-//        return productRepository.findAll();
-//    }
-//    public  List <Product> listProducts(String title, String brand){
-//        if (title!=null) {
-//            List<Product> found = productRepository.findByTitle(title);
-//            if(brand != null){
-//                List<Product> res = new ArrayList<>();
-//                ListIterator<Product> lItr = found.listIterator();
-//                while(lItr.hasNext()){
-//                    Product item = lItr.next();
-//                    if (item.getBrand().equals(brand)){
-//                        res.add(item);
-//                    }
-//                }
-//                return res;
-//            }
-//            return productRepository.findByTitle(title);
-//        }
-//        else if (brand!=null)
-//            return productRepository.findByBrand(brand);
-//        return productRepository.findAll();
-//    }
+
     public  List <Product> listProducts(String title, String brand){
         if (title==null && brand==null)
             return productRepository.findAll();

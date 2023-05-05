@@ -22,11 +22,11 @@
             </a><br>
             <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
                href="/edit/products">
-                Добавить товар
+                Редактировать список товаров
             </a>
             <#else>
                 <a class="btn btn-dark mb-3" style="text-align: center; width: 100%"
-                   href="/user/products">
+                   href="/basket">
                     Корзина
                 </a>
         </#if>
