@@ -1,7 +1,7 @@
 package com.example.sportshop.controllers;
 
-import com.example.sportshop.models.User;
-import com.example.sportshop.models.enums.Role;
+import com.example.sportshop.DAO.models.User;
+import com.example.sportshop.DAO.models.enums.Role;
 import com.example.sportshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,7 +37,7 @@ public class AdminController {
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
-        model.addAttribute("user", userService.getUserByPrincipal(principal));
+//        model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("roles", Role.values());
         return "user-edit";
     }

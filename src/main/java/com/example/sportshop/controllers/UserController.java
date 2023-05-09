@@ -1,7 +1,7 @@
 package com.example.sportshop.controllers;
 
 
-import com.example.sportshop.models.User;
+import com.example.sportshop.DAO.models.User;
 import com.example.sportshop.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

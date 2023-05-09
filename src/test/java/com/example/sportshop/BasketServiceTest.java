@@ -1,10 +1,10 @@
 package com.example.sportshop;
 
 
-import com.example.sportshop.models.Basket;
-import com.example.sportshop.models.Product;
-import com.example.sportshop.repositories.BasketRepository;
-import com.example.sportshop.repositories.ProductRepository;
+import com.example.sportshop.DAO.models.Basket;
+import com.example.sportshop.DAO.models.Product;
+import com.example.sportshop.DAO.repositories.BasketRepository;
+import com.example.sportshop.DAO.repositories.ProductRepository;
 import com.example.sportshop.services.BasketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

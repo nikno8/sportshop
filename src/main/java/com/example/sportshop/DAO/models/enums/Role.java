@@ -1,4 +1,4 @@
-package com.example.sportshop.models.enums;
+package com.example.sportshop.DAO.models.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

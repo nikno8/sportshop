@@ -1,7 +1,7 @@
 package com.example.sportshop.controllers;
 
-import com.example.sportshop.models.Image;
-import com.example.sportshop.repositories.ImageRepository;
+import com.example.sportshop.DAO.models.Image;
+import com.example.sportshop.DAO.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;

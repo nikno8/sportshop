@@ -1,9 +1,9 @@
 package com.example.sportshop;
 
 
-import com.example.sportshop.models.User;
-import com.example.sportshop.models.enums.Role;
-import com.example.sportshop.repositories.UserRepository;
+import com.example.sportshop.DAO.models.User;
+import com.example.sportshop.DAO.models.enums.Role;
+import com.example.sportshop.DAO.repositories.UserRepository;
 import com.example.sportshop.services.CustomUserDetailsService;
 import com.example.sportshop.services.UserService;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,9 +1,9 @@
 package com.example.sportshop;
 
 
-import com.example.sportshop.models.User;
-import com.example.sportshop.models.enums.Role;
-import com.example.sportshop.repositories.UserRepository;
+import com.example.sportshop.DAO.models.User;
+import com.example.sportshop.DAO.models.enums.Role;
+import com.example.sportshop.DAO.repositories.UserRepository;
 import com.example.sportshop.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.security.Principal;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -97,11 +98,25 @@ class UserServiceTest {
     }
 
     @Test
-    void testGetUserByPrincipal() {
+    public void testGetUserByPrincipal() {
+
         User user = new User();
         user.setId(1L);
         user.setEmail("test@example.com");
-        when(userRepository.findByEmail(any())).thenReturn(user);
-        assertEquals(user, userService.getUserByPrincipal(null));
+
+        Principal principal = new Principal() {
+            @Override
+            public String getName() {
+                return "test@example.com";
+            }
+        };
+
+        when(userRepository.findByEmail(principal.getName())).thenReturn(user);
+
+        User result = userService.getUserByPrincipal(principal);
+
+        // Проверяем, что метод вернул корректный результат
+        assertEquals(user.getId(), result.getId());
+        assertEquals(user.getEmail(), result.getEmail());
     }
 }

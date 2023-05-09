@@ -1,8 +1,8 @@
 package com.example.sportshop.controllers;
 
-import com.example.sportshop.models.Basket;
-import com.example.sportshop.models.User;
-import com.example.sportshop.repositories.BasketRepository;
+import com.example.sportshop.DAO.models.Basket;
+import com.example.sportshop.DAO.models.User;
+import com.example.sportshop.DAO.repositories.BasketRepository;
 import com.example.sportshop.services.BasketService;
 import com.example.sportshop.services.ProductService;
 import lombok.RequiredArgsConstructor;

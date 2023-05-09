@@ -1,4 +1,4 @@
-package com.example.sportshop.models;
+package com.example.sportshop.DAO.models;
 
 import javax.persistence.*;
 

@@ -1,10 +1,10 @@
-package com.example.sportshop.models;
+package com.example.sportshop.DAO.models;
 
 
 
 import javax.persistence.*;
 
-import com.example.sportshop.models.enums.Role;
+import com.example.sportshop.DAO.models.enums.Role;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

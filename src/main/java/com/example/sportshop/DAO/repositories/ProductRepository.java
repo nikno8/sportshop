@@ -1,6 +1,6 @@
-package com.example.sportshop.repositories;
+package com.example.sportshop.DAO.repositories;
 
-import com.example.sportshop.models.Product;
+import com.example.sportshop.DAO.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

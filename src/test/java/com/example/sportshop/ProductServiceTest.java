@@ -1,14 +1,15 @@
 package com.example.sportshop;
 
-import com.example.sportshop.models.Product;
-import com.example.sportshop.models.User;
-import com.example.sportshop.repositories.ProductRepository;
-import com.example.sportshop.repositories.UserRepository;
+import com.example.sportshop.DAO.models.Product;
+import com.example.sportshop.DAO.models.User;
+import com.example.sportshop.DAO.repositories.ProductRepository;
+import com.example.sportshop.DAO.repositories.UserRepository;
 import com.example.sportshop.services.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class ProductServiceTest {
@@ -44,31 +46,41 @@ public class ProductServiceTest {
         product.setTitle(title);
         product.setBrand(brand);
         productList.add(product);
-        when(productRepository.findByTitle(title)).thenReturn(productList);
+        when(productRepository.findByBrandAndTitle(brand,title)).thenReturn(productList);
         List<Product> result = productService.listProducts(title, brand);
-        assertEquals(1, result.size());
+        assertEquals(1,result.size());
         assertEquals(title, result.get(0).getTitle());
         assertEquals(brand, result.get(0).getBrand());
     }
 
+
     @Test
-    void testSaveProduct() throws IOException {
-        String email = "test@test.com";
-        User user = new User();
-        user.setEmail(email);
-        when(userRepository.findByEmail(email)).thenReturn(user);
+    public void testSaveProduct() throws IOException {
+        // создаем тестовые данные
         Principal principal = new Principal() {
             @Override
             public String getName() {
-                return email;
+                return "testuser";
             }
         };
         Product product = new Product();
-        MultipartFile file1 = mock(MultipartFile.class);
-        MultipartFile file2 = mock(MultipartFile.class);
-        MultipartFile file3 = mock(MultipartFile.class);
-//        productService.saveProduct(principal, product, file1, file2, file3);
-//        verify(productRepository, times(2)).save(any(Product.class));
+        product.setTitle("Test Product");
+        product.setBrand("Test Brand");
+        MultipartFile file1 = new MockMultipartFile("image1.jpg", new byte[10]);
+        MultipartFile file2 = new MockMultipartFile("image2.jpg", new byte[20]);
+        MultipartFile file3 = new MockMultipartFile("image3.jpg", new byte[30]);
+
+        // вызываем тестируемый метод
+        productService.saveProduct(principal, product, file1, file2, file3);
+
+        // проверяем результаты сохранения
+        List<Product> products = productService.getAllProducts();
+        assertEquals(1, products.size());
+        Product savedProduct = products.get(0);
+        assertEquals("Test Product", savedProduct.getTitle());
+        assertEquals("Test Brand", savedProduct.getBrand());
+        assertNotNull(savedProduct.getPreviewImageId());
+        assertEquals(3, savedProduct.getImages().size());
     }
 
     @Test

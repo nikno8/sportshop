@@ -1,10 +1,9 @@
 package com.example.sportshop.controllers;
 
-import com.example.sportshop.models.Product;
-import com.example.sportshop.models.User;
+import com.example.sportshop.DAO.models.Product;
+import com.example.sportshop.DAO.models.User;
 import com.example.sportshop.services.ProductService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +39,6 @@ public class ProductController {
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("product", product);
         model.addAttribute("images", product.getImages());
-//        model.addAttribute("brand", product.getBrand());
         return "product-info";
     }
 

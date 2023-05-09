@@ -9,7 +9,7 @@
         <div class="carousel-inner" height="800px">
             <#list images as image>
                 <div class="carousel-item <#if image.previewImage>active</#if>">
-                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                    <svg class="bd-placeholder-img" width="100%" height="750px" xmlns="http://www.w3.org/2000/svg"
                          role="img" aria-label=" :  " preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title></title>
                         <rect width="100%" height="100%" fill="#777"></rect>
@@ -19,7 +19,7 @@
                     <div class="container">
                         <div class="carousel-caption">
                             <a href="/images/${image.id}">
-                                <img class="product" style="height: 100px" src="/images/${image.id}">
+                                <img class="product" style="height: 700px" src="/images/${image.id}">
                             </a>
                         </div>
                     </div>
@@ -36,6 +36,15 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <br>
+    <div class="card" style="width: 20%; height: 20%">
+        <div class="card-body">
+            <form action="/basket/add/${product.id}" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button class="btn btn-outline-success">Добавить в корзину</button>
+            </form>
+        </div>
+    </div>
     <hr>
     <p><h1 style="text-align: center">${product.title} | ${product.price} ₽</h1></p>
     <p style="text-align: center">${product.description}</p>
@@ -44,3 +53,4 @@
     <hr>
 
 </@t.template>
+

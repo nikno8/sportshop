@@ -1,9 +1,9 @@
 package com.example.sportshop.services;
 
-import com.example.sportshop.models.Basket;
-import com.example.sportshop.models.Product;
-import com.example.sportshop.repositories.BasketRepository;
-import com.example.sportshop.repositories.ProductRepository;
+import com.example.sportshop.DAO.models.Basket;
+import com.example.sportshop.DAO.models.Product;
+import com.example.sportshop.DAO.repositories.BasketRepository;
+import com.example.sportshop.DAO.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

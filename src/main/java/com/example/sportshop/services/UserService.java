@@ -1,8 +1,8 @@
 package com.example.sportshop.services;
 
-import com.example.sportshop.models.User;
-import com.example.sportshop.models.enums.Role;
-import com.example.sportshop.repositories.UserRepository;
+import com.example.sportshop.DAO.models.User;
+import com.example.sportshop.DAO.models.enums.Role;
+import com.example.sportshop.DAO.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
