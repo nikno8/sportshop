@@ -23,7 +23,7 @@
     </form>
     <br>
      <#if !user.email?? && !user.isAdmin()>
-        <form action="/login" method="get" >
+        <form action="/" method="get" >
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <button class="btn btn-primary" style="width: 100%">Авторизируйтесь для покупок</button>
         </form>
