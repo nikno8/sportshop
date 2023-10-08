@@ -1,0 +1,35 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: your-app-name
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/sport_shop
+      SPRING_DATASOURCE_USERNAME: nikno8
+      SPRING_DATASOURCE_PASSWORD: nikitalaguT03
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_2
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sport_shop
+      MYSQL_USER: nikno8
+      MYSQL_PASSWORD: nikitalaguT03
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 1s
+      retries: 5
+    volumes:
+      - mysql-data:/var/lib/mysql  # Здесь определен Docker-том для сохранения данных MySQL
+
+volumes:
+  mysql-data:  # Определение Docker-тома для данных MySQL

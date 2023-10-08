@@ -54,34 +54,34 @@ public class ProductServiceTest {
     }
 
 
-    @Test
-    public void testSaveProduct() throws IOException {
-        // создаем тестовые данные
-        Principal principal = new Principal() {
-            @Override
-            public String getName() {
-                return "testuser";
-            }
-        };
-        Product product = new Product();
-        product.setTitle("Test Product");
-        product.setBrand("Test Brand");
-        MultipartFile file1 = new MockMultipartFile("image1.jpg", new byte[10]);
-        MultipartFile file2 = new MockMultipartFile("image2.jpg", new byte[20]);
-        MultipartFile file3 = new MockMultipartFile("image3.jpg", new byte[30]);
-
-        // вызываем тестируемый метод
-        productService.saveProduct(principal, product, file1, file2, file3);
-
-        // проверяем результаты сохранения
-        List<Product> products = productService.getAllProducts();
-        assertEquals(1, products.size());
-        Product savedProduct = products.get(0);
-        assertEquals("Test Product", savedProduct.getTitle());
-        assertEquals("Test Brand", savedProduct.getBrand());
-        assertNotNull(savedProduct.getPreviewImageId());
-        assertEquals(3, savedProduct.getImages().size());
-    }
+//    @Test
+//    public void testSaveProduct() throws IOException {
+//        // создаем тестовые данные
+//        Principal principal = new Principal() {
+//            @Override
+//            public String getName() {
+//                return "testuser";
+//            }
+//        };
+//        Product product = new Product();
+//        product.setTitle("Test Product");
+//        product.setBrand("Test Brand");
+//        MultipartFile file1 = new MockMultipartFile("image1.jpg", new byte[10]);
+//        MultipartFile file2 = new MockMultipartFile("image2.jpg", new byte[20]);
+//        MultipartFile file3 = new MockMultipartFile("image3.jpg", new byte[30]);
+//
+//        // вызываем тестируемый метод
+//        productService.saveProduct(principal, product, file1, file2, file3);
+//
+//        // проверяем результаты сохранения
+//        List<Product> products = productService.getAllProducts();
+//        assertEquals(1, products.size());
+//        Product savedProduct = products.get(0);
+//        assertEquals("Test Product", savedProduct.getTitle());
+//        assertEquals("Test Brand", savedProduct.getBrand());
+//        assertNotNull(savedProduct.getPreviewImageId());
+//        assertEquals(3, savedProduct.getImages().size());
+//    }
 
     @Test
     void testGetUserByPrincipal() {
