@@ -73,7 +73,7 @@ public class BasketService {
         int sum = 0;
         List<Basket> allBasket = getBasket();
         for(Basket item : allBasket) {
-            sum+=item.getCurr_product().getPrice() * item.getAmount();
+            sum+=item.getCurr_product().getPrice();
         }
         return sum;
     }

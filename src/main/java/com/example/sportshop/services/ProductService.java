@@ -29,7 +29,7 @@ public class ProductService {
         if (title==null && brand==null)
             return productRepository.findAll();
         else if (title==null || title.equals(""))
-            return productRepository.findByBrand(brand);
+            return productRepository.findByBrand("Nike");
         else if (brand==null || brand.equals(""))
             return productRepository.findByTitle(title);
         return productRepository.findByBrandAndTitle(brand, title);
