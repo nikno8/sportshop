@@ -28,6 +28,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="amount">Количество товара</label>
+                    <div class="input-group mb-3">
+                        <input type="number" required class="form-control" id="amount" name="amount">
+                        <div class="input-group-append">
+                            <span class="input-group-text">₽</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label for="searchBrand">Бренд</label>
                     <select id="searchBrand" required name="brand" class="form-control">
                         <option value="">Бренд не выбран</option>

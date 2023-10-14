@@ -59,7 +59,7 @@ public class BasketController {
         model.addAttribute("user", user);
         List<Basket> basketItems = basketService.getBasket();
         model.addAttribute("basket", basketItems);
-        basketRepository.deleteAll(basketItems);
+        basketService.createOrder();
         return "redirect:/order";
     }
 

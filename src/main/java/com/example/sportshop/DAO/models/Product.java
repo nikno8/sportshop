@@ -29,6 +29,8 @@ public class Product {
     @Column(name="brand")
     private String brand;
 
+    private int amount;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
     mappedBy = "product")
     private List<Image> images = new ArrayList<>();

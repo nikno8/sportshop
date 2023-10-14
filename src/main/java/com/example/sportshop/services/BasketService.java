@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -51,6 +52,20 @@ public class BasketService {
                 basketRepository.save(basket);
             }
         }
+    }
+    public boolean createOrder(){
+        for (Basket basket : getBasket()){
+            Optional<Product> product = productRepository.findById(basket.getProductId());
+            if (product.get().getAmount() - basket.getAmount() >=0){
+                product.get().setAmount(product.get().getAmount() - basket.getAmount());
+                productRepository.save(product.get());
+            }
+            else{
+                return false;
+            }
+        }
+        basketRepository.deleteAll();
+        return true;
     }
 
 
